@@ -1,10 +1,10 @@
 package flight.reservation.plane;
 
-public class PassengerPlane {
+public class PassengerPlane implements Aircraft {
 
-    public String model;
-    public int passengerCapacity;
-    public int crewCapacity;
+    private String model;
+    private int passengerCapacity;
+    private int crewCapacity;
 
     public PassengerPlane(String model) {
         this.model = model;
@@ -30,4 +30,15 @@ public class PassengerPlane {
         }
     }
 
+    public String getModel() {
+        return model;
+    }
+
+    public int getPassengerCapacity() {
+        return passengerCapacity;
+    }
+
+    public int getCrewCapacity() {
+        return crewCapacity;
+    }
 }

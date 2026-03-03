@@ -1,6 +1,6 @@
 package flight.reservation.plane;
 
-public class Helicopter {
+public class Helicopter implements Aircraft {
     private final String model;
     private final int passengerCapacity;
 
@@ -21,5 +21,9 @@ public class Helicopter {
 
     public int getPassengerCapacity() {
         return passengerCapacity;
+    }
+
+    public int getCrewCapacity() {
+        return 2;
     }
 }
