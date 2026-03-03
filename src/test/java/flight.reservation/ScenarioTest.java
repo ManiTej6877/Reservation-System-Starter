@@ -153,6 +153,7 @@ public class ScenarioTest {
             @BeforeEach
             public void initCreditCard() {
                 Mockito.when(creditCard.isValid()).thenReturn(true);
+                Mockito.when(creditCard.validate()).thenReturn(true);
                 Mockito.when(creditCard.getAmount()).thenReturn(10.0);
             }
 
@@ -173,6 +174,7 @@ public class ScenarioTest {
             @BeforeEach
             public void initCreditCard() {
                 Mockito.when(creditCard.isValid()).thenReturn(false);
+                Mockito.when(creditCard.validate()).thenReturn(false);
             }
 
             @Test
@@ -192,6 +194,7 @@ public class ScenarioTest {
             @BeforeEach
             public void initCreditCard() {
                 Mockito.when(creditCard.isValid()).thenReturn(true);
+                Mockito.when(creditCard.validate()).thenReturn(true);
                 creditCard.setAmount(1000.0);
             }
 
