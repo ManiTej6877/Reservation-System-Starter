@@ -17,10 +17,10 @@ public class PassengerNotificationService implements PassengerObserver {
         System.out.println("✈️  FLIGHT SCHEDULED NOTIFICATION");
         System.out.println("Passenger: " + passenger.getName());
         System.out.println("Flight: " + flight.getNumber());
-        System.out.println("From: " + flight.getDeparture().getCode() + " (" + flight.getDeparture().getLocationName() + ")");
-        System.out.println("To: " + flight.getArrival().getCode() + " (" + flight.getArrival().getLocationName() + ")");
+            System.out.println("From: " + flight.getDeparture().getCode() + " (" + flight.getDeparture().getLocation() + ")");
+            System.out.println("To: " + flight.getArrival().getCode() + " (" + flight.getArrival().getLocation() + ")");
         System.out.println("Departure: " + departureTime);
-        System.out.println("Aircraft: " + flight.getAircraft().getType());
+            System.out.println("Aircraft: " + flight.getAircraft().getModel());
         System.out.println("---");
     }
     
