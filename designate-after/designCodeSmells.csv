@@ -1,0 +1,12 @@
+Project Name,Package Name,Type Name,Code Smell
+main,flight.reservation,Passenger,Unutilized Abstraction
+main,flight.reservation.flight,ScheduledFlight,Broken Hierarchy
+main,flight.reservation.order,FlightOrder,Unutilized Abstraction
+main,flight.reservation.order,FlightOrder,Broken Hierarchy
+main,flight.reservation.order,Order,Unutilized Abstraction
+main,flight.reservation.payment,Paypal,Deficient Encapsulation
+main,flight.reservation.plane,AircraftFactory,Unutilized Abstraction
+main,flight.reservation.plane,Helicopter,Unutilized Abstraction
+main,flight.reservation.plane,PassengerDrone,Unutilized Abstraction
+main,flight.reservation.plane,PassengerPlane,Unutilized Abstraction
+main,(default package),Runner,Unutilized Abstraction
