@@ -32,11 +32,11 @@ Flight flight = new FlightBuilder()
 <div style="display:flex;gap:10px;align-items:flex-start;">
     <div style="width:48%;text-align:center;">
         <div style="margin-top:6px;font-weight:600;">Before</div>
-        <img src="WhatsApp%20Image%202026-03-04%20at%2018.48.30.jpeg" alt="before-1" style="width:100%;height:auto;object-fit:contain;" />
+        <img src="before_builder_pattern.jpeg" alt="before-1" style="width:100%;height:auto;object-fit:contain;" />
     </div>
     <div style="width:48%;text-align:center;">
         <div style="margin-bottom:6px;font-weight:600;">After</div>
-        <img src="WhatsApp%20Image%202026-03-04%20at%2018.52.28.jpeg" alt="before-2" style="width:100%;height:auto;object-fit:contain;" />
+        <img src="after_builder_pattern.jpeg" alt="before-2" style="width:100%;height:auto;object-fit:contain;" />
     </div>
 </div>
 
