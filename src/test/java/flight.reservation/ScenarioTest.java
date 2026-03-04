@@ -57,7 +57,12 @@ public class ScenarioTest {
             @Test
             @DisplayName("then the flight should not be available")
             void thenFlightNotAvailable() {
-                assertThrows(IllegalArgumentException.class, () -> new Flight(1, startAirport, destinationAirport, new Helicopter("H1")));
+                assertThrows(IllegalArgumentException.class, () -> Flight.builder()
+                        .number(1)
+                        .departure(startAirport)
+                        .arrival(destinationAirport)
+                        .aircraft(new Helicopter("H1"))
+                        .build());
             }
 
         }
@@ -70,7 +75,12 @@ public class ScenarioTest {
             public void initFlights() {
                 startAirport = new Airport("John F. Kennedy International Airport", "JFK", "Queens, New York, New York");
                 destinationAirport = new Airport("Frankfurt Airport", "FRA", "Frankfurt, Hesse");
-                flight = new Flight(1, startAirport, destinationAirport, new Helicopter("H1"));
+                flight = Flight.builder()
+                        .number(1)
+                        .departure(startAirport)
+                        .arrival(destinationAirport)
+                        .aircraft(new Helicopter("H1"))
+                        .build();
                 Date departure = TestUtil.addDays(Date.from(Instant.now()), 3);
                 schedule.scheduleFlight(flight, departure);
             }
@@ -138,7 +148,12 @@ public class ScenarioTest {
             // flights
             startAirport = new Airport("Berlin Airport", "BER", "Berlin, Berlin");
             destinationAirport = new Airport("Frankfurt Airport", "FRA", "Frankfurt, Hesse");
-            flight = new Flight(1, startAirport, destinationAirport, new PassengerPlane("A380"));
+            flight = Flight.builder()
+                    .number(1)
+                    .departure(startAirport)
+                    .arrival(destinationAirport)
+                    .aircraft(new PassengerPlane("A380"))
+                    .build();
             Date departure = TestUtil.addDays(Date.from(Instant.now()), 3);
             schedule.scheduleFlight(flight, departure);
             // customer

@@ -29,12 +29,12 @@ public class Runner {
     );
 
     static List<Flight> flights = Arrays.asList(
-            new Flight(1, airports.get(0), airports.get(1), aircrafts.get(0)),
-            new Flight(2, airports.get(1), airports.get(2), aircrafts.get(1)),
-            new Flight(3, airports.get(2), airports.get(4), aircrafts.get(2)),
-            new Flight(4, airports.get(3), airports.get(2), aircrafts.get(3)),
-            new Flight(5, airports.get(4), airports.get(2), aircrafts.get(4)),
-            new Flight(6, airports.get(5), airports.get(7), aircrafts.get(5))
+            Flight.builder().number(1).departure(airports.get(0)).arrival(airports.get(1)).aircraft(aircrafts.get(0)).build(),
+            Flight.builder().number(2).departure(airports.get(1)).arrival(airports.get(2)).aircraft(aircrafts.get(1)).build(),
+            Flight.builder().number(3).departure(airports.get(2)).arrival(airports.get(4)).aircraft(aircrafts.get(2)).build(),
+            Flight.builder().number(4).departure(airports.get(3)).arrival(airports.get(2)).aircraft(aircrafts.get(3)).build(),
+            Flight.builder().number(5).departure(airports.get(4)).arrival(airports.get(2)).aircraft(aircrafts.get(4)).build(),
+            Flight.builder().number(6).departure(airports.get(5)).arrival(airports.get(7)).aircraft(aircrafts.get(5)).build()
     );
 
     static Schedule schedule;

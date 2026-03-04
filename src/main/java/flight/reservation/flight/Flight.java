@@ -20,6 +20,14 @@ public class Flight {
         checkValidity();
     }
 
+    Flight(FlightBuilder builder) throws IllegalArgumentException {
+        this.number = builder.getNumber();
+        this.departure = builder.getDeparture();
+        this.arrival = builder.getArrival();
+        this.aircraft = builder.getAircraft();
+        checkValidity();
+    }
+
     private void checkValidity() throws IllegalArgumentException {
         if (!isAircraftValid(departure) || !isAircraftValid(arrival)) {
             throw new IllegalArgumentException("Selected aircraft is not valid for the selected route.");
@@ -49,6 +57,14 @@ public class Flight {
     @Override
     public String toString() {
         return aircraft.toString() + "-" + number + "-" + departure.getCode() + "/" + arrival.getCode();
+    }
+
+    /**
+     * Creates a new FlightBuilder instance to build Flight objects
+     * @return a new FlightBuilder
+     */
+    public static FlightBuilder builder() {
+        return new FlightBuilder();
     }
 
 }
