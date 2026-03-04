@@ -36,6 +36,8 @@ public class FlightOrder extends Order {
         boolean isPaid = paymentStrategy.pay(this.getPrice());
         if (isPaid) {
             this.setClosed();
+            // Notify all passengers about booking confirmation
+            notifyPassengersBookingConfirmed();
         }
         return isPaid;
     }
@@ -48,4 +50,16 @@ public class FlightOrder extends Order {
         Paypal paypal = new Paypal(email, password);
         return processOrder(paypal);
     }
+
+    /**
+     * Notifies all passengers about their booking confirmation.
+     */
+    private void notifyPassengersBookingConfirmed() {
+        for (var passenger : this.getPassengers()) {
+            for (var flight : this.flights) {
+                passenger.notifyBookingConfirmed(flight, this.getPrice());
+            }
+        }
+    }
+
 }

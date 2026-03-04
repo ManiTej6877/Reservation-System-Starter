@@ -1,6 +1,7 @@
 package flight.reservation;
 
 import flight.reservation.flight.ScheduledFlight;
+import flight.reservation.observer.PassengerNotificationService;
 import flight.reservation.order.FlightOrder;
 import flight.reservation.order.Order;
 
@@ -33,6 +34,16 @@ public class Customer {
                 .collect(Collectors.toList());
         order.setPassengers(passengers);
         order.getScheduledFlights().forEach(scheduledFlight -> scheduledFlight.addPassengers(passengers));
+        
+        // Notify passengers about their flights and add observer
+        PassengerNotificationService notificationService = new PassengerNotificationService();
+        for (Passenger passenger : passengers) {
+            passenger.addObserver(notificationService);
+            for (ScheduledFlight flight : flights) {
+                passenger.notifyFlightScheduled(flight);
+            }
+        }
+        
         orders.add(order);
         return order;
     }
