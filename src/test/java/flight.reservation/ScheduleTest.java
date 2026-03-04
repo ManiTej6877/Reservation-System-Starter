@@ -1,6 +1,7 @@
 package flight.reservation;
 
 import flight.reservation.flight.Flight;
+import flight.reservation.flight.FlightBuilder;
 import flight.reservation.flight.Schedule;
 import flight.reservation.flight.ScheduledFlight;
 import flight.reservation.plane.Helicopter;
@@ -55,7 +56,7 @@ public class ScheduleTest {
         @Test
         @DisplayName("then removing a flight should still yield an empty list")
         void thenScheduleShouldYieldEmpty() {
-            schedule.removeFlight(Flight.builder()
+            schedule.removeFlight(new FlightBuilder()
                     .number(1)
                     .departure(new Airport("a", "a", "a"))
                     .arrival(new Airport("b", "b", "b"))
@@ -77,7 +78,7 @@ public class ScheduleTest {
                 Airport destAirport = new Airport("Frankfurt Airport", "FRA", "Frankfurt, Hesse");
 
                 PassengerPlane aircraft = new PassengerPlane("A380");
-                flight = Flight.builder()
+                flight = new FlightBuilder()
                         .number(1)
                         .departure(startAirport)
                         .arrival(destAirport)
@@ -133,12 +134,12 @@ public class ScheduleTest {
         );
 
         List<Flight> flights = Arrays.asList(
-                Flight.builder().number(1).departure(airports.get(0)).arrival(airports.get(1)).aircraft(new PassengerPlane("A350")).build(),
-                Flight.builder().number(2).departure(airports.get(1)).arrival(airports.get(2)).aircraft(new PassengerPlane("A380")).build(),
-                Flight.builder().number(3).departure(airports.get(2)).arrival(airports.get(4)).aircraft(new PassengerPlane("Embraer 190")).build(),
-                Flight.builder().number(4).departure(airports.get(3)).arrival(airports.get(2)).aircraft(new PassengerPlane("Antonov AN2")).build(),
-                Flight.builder().number(5).departure(airports.get(4)).arrival(airports.get(2)).aircraft(new Helicopter("H1")).build(),
-                Flight.builder().number(6).departure(airports.get(5)).arrival(airports.get(7)).aircraft(new PassengerDrone("HypaHype")).build()
+                new FlightBuilder().number(1).departure(airports.get(0)).arrival(airports.get(1)).aircraft(new PassengerPlane("A350")).build(),
+                new FlightBuilder().number(2).departure(airports.get(1)).arrival(airports.get(2)).aircraft(new PassengerPlane("A380")).build(),
+                new FlightBuilder().number(3).departure(airports.get(2)).arrival(airports.get(4)).aircraft(new PassengerPlane("Embraer 190")).build(),
+                new FlightBuilder().number(4).departure(airports.get(3)).arrival(airports.get(2)).aircraft(new PassengerPlane("Antonov AN2")).build(),
+                new FlightBuilder().number(5).departure(airports.get(4)).arrival(airports.get(2)).aircraft(new Helicopter("H1")).build(),
+                new FlightBuilder().number(6).departure(airports.get(5)).arrival(airports.get(7)).aircraft(new PassengerDrone("HypaHype")).build()
         );
 
         @BeforeEach

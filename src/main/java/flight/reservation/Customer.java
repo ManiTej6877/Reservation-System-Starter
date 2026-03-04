@@ -4,6 +4,10 @@ import flight.reservation.flight.ScheduledFlight;
 import flight.reservation.observer.PassengerNotificationService;
 import flight.reservation.order.FlightOrder;
 import flight.reservation.order.Order;
+import flight.reservation.validation.CustomerNoFlyListHandler;
+import flight.reservation.validation.FlightCapacityHandler;
+import flight.reservation.validation.PassengerNoFlyListHandler;
+import flight.reservation.validation.ValidationHandler;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,11 +18,23 @@ public class Customer {
     private String email;
     private String name;
     private List<Order> orders;
+    private ValidationHandler validationChain;
 
     public Customer(String name, String email) {
         this.name = name;
         this.email = email;
         this.orders = new ArrayList<>();
+        this.validationChain = buildValidationChain();
+    }
+
+    private ValidationHandler buildValidationChain() {
+        ValidationHandler customerHandler = new CustomerNoFlyListHandler();
+        ValidationHandler passengerHandler = new PassengerNoFlyListHandler();
+        ValidationHandler capacityHandler = new FlightCapacityHandler();
+        
+        customerHandler.setNext(passengerHandler).setNext(capacityHandler);
+        
+        return customerHandler;
     }
 
     public FlightOrder createOrder(List<String> passengerNames, List<ScheduledFlight> flights, double price) {
@@ -49,18 +65,7 @@ public class Customer {
     }
 
     private boolean isOrderValid(List<String> passengerNames, List<ScheduledFlight> flights) {
-        boolean valid = true;
-        valid = valid && !FlightOrder.getNoFlyList().contains(this.getName());
-        valid = valid && passengerNames.stream().noneMatch(passenger -> FlightOrder.getNoFlyList().contains(passenger));
-        valid = valid && flights.stream().allMatch(scheduledFlight -> {
-            try {
-                return scheduledFlight.getAvailableCapacity() >= passengerNames.size();
-            } catch (NoSuchFieldException e) {
-                e.printStackTrace();
-                return false;
-            }
-        });
-        return valid;
+        return validationChain.validate(this, passengerNames, flights);
     }
 
     public String getEmail() {

@@ -1,6 +1,7 @@
 package flight.reservation;
 
 import flight.reservation.flight.Flight;
+import flight.reservation.flight.FlightBuilder;
 import flight.reservation.flight.Schedule;
 import flight.reservation.flight.ScheduledFlight;
 import flight.reservation.order.FlightOrder;
@@ -57,7 +58,7 @@ public class ScenarioTest {
             @Test
             @DisplayName("then the flight should not be available")
             void thenFlightNotAvailable() {
-                assertThrows(IllegalArgumentException.class, () -> Flight.builder()
+                assertThrows(IllegalArgumentException.class, () -> new FlightBuilder()
                         .number(1)
                         .departure(startAirport)
                         .arrival(destinationAirport)
@@ -75,7 +76,7 @@ public class ScenarioTest {
             public void initFlights() {
                 startAirport = new Airport("John F. Kennedy International Airport", "JFK", "Queens, New York, New York");
                 destinationAirport = new Airport("Frankfurt Airport", "FRA", "Frankfurt, Hesse");
-                flight = Flight.builder()
+                flight = new FlightBuilder()
                         .number(1)
                         .departure(startAirport)
                         .arrival(destinationAirport)
@@ -148,7 +149,7 @@ public class ScenarioTest {
             // flights
             startAirport = new Airport("Berlin Airport", "BER", "Berlin, Berlin");
             destinationAirport = new Airport("Frankfurt Airport", "FRA", "Frankfurt, Hesse");
-            flight = Flight.builder()
+            flight = new FlightBuilder()
                     .number(1)
                     .departure(startAirport)
                     .arrival(destinationAirport)

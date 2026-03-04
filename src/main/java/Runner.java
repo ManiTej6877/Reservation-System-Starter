@@ -1,6 +1,7 @@
 import flight.reservation.Airport;
 import flight.reservation.flight.Schedule;
 import flight.reservation.flight.Flight;
+import flight.reservation.flight.FlightBuilder;
 import flight.reservation.plane.Aircraft;
 import flight.reservation.plane.AircraftFactory;
 
@@ -29,12 +30,12 @@ public class Runner {
     );
 
     static List<Flight> flights = Arrays.asList(
-            Flight.builder().number(1).departure(airports.get(0)).arrival(airports.get(1)).aircraft(aircrafts.get(0)).build(),
-            Flight.builder().number(2).departure(airports.get(1)).arrival(airports.get(2)).aircraft(aircrafts.get(1)).build(),
-            Flight.builder().number(3).departure(airports.get(2)).arrival(airports.get(4)).aircraft(aircrafts.get(2)).build(),
-            Flight.builder().number(4).departure(airports.get(3)).arrival(airports.get(2)).aircraft(aircrafts.get(3)).build(),
-            Flight.builder().number(5).departure(airports.get(4)).arrival(airports.get(2)).aircraft(aircrafts.get(4)).build(),
-            Flight.builder().number(6).departure(airports.get(5)).arrival(airports.get(7)).aircraft(aircrafts.get(5)).build()
+            new FlightBuilder().number(1).departure(airports.get(0)).arrival(airports.get(1)).aircraft(aircrafts.get(0)).build(),
+            new FlightBuilder().number(2).departure(airports.get(1)).arrival(airports.get(2)).aircraft(aircrafts.get(1)).build(),
+            new FlightBuilder().number(3).departure(airports.get(2)).arrival(airports.get(4)).aircraft(aircrafts.get(2)).build(),
+            new FlightBuilder().number(4).departure(airports.get(3)).arrival(airports.get(2)).aircraft(aircrafts.get(3)).build(),
+            new FlightBuilder().number(5).departure(airports.get(4)).arrival(airports.get(2)).aircraft(aircrafts.get(4)).build(),
+            new FlightBuilder().number(6).departure(airports.get(5)).arrival(airports.get(7)).aircraft(aircrafts.get(5)).build()
     );
 
     static Schedule schedule;

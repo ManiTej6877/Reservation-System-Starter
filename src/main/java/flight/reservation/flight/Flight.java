@@ -59,12 +59,4 @@ public class Flight {
         return aircraft.toString() + "-" + number + "-" + departure.getCode() + "/" + arrival.getCode();
     }
 
-    /**
-     * Creates a new FlightBuilder instance to build Flight objects
-     * @return a new FlightBuilder
-     */
-    public static FlightBuilder builder() {
-        return new FlightBuilder();
-    }
-
 }
