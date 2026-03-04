@@ -101,7 +101,7 @@
 **Key Methods with Improved Complexity:**
 
 | Method | Class | LOC | CC | PC | Change |
-|--------|-------|-----|----|----|--------|--------|
+|--------|-------|-----|----|----|--------|
 | Flight.isAircraftValid() | Flight | 3 | 1 | 1 | -84% LOC, -75% CC |
 | ScheduledFlight.getCrewMemberCapacity() | ScheduledFlight | 3 | 1 | 0 | -75% LOC, -75% CC |
 | ScheduledFlight.getCapacity() | ScheduledFlight | 3 | 1 | 0 | -75% LOC, -75% CC |
@@ -264,15 +264,57 @@ public boolean isAircraftValid(Aircraft aircraft) {
 -  New aircraft types can be added without modifying Flight
 -  Follows Open/Closed Principle (SOLID)
 
-**Similar Improvements in ScheduledFlight Methods:**
+**Similar Improvements in Payment Processing (Strategy Pattern):**
 
 ```
-BEFORE: getCrewMemberCapacity() - 12 LOC, CC=4 (type checking each aircraft)
-AFTER:  getCrewMemberCapacity() - 3 LOC, CC=1 (delegation to aircraft)
+BEFORE (Multiple methods with duplicated validation/payment flow):
+public boolean processOrderWithCreditCard(CreditCard creditCard) throws IllegalStateException {
+  if (isClosed()) return true;
+  if (!cardIsPresentAndValid(creditCard)) {
+    throw new IllegalStateException("Payment information is not set or not valid.");
+  }
+  boolean isPaid = payWithCreditCard(creditCard, this.getPrice());
+  if (isPaid) this.setClosed();
+  return isPaid;
+}
 
-BEFORE: getCapacity() - 12 LOC, CC=4 (type checking each aircraft)
-AFTER:  getCapacity() - 3 LOC, CC=1 (delegation to aircraft)
+public boolean processOrderWithPayPal(String email, String password) throws IllegalStateException {
+  if (isClosed()) return true;
+  if (email == null || password == null || !email.equals(Paypal.DATA_BASE.get(password))) {
+    throw new IllegalStateException("Payment information is not set or not valid.");
+  }
+  boolean isPaid = payWithPayPal(email, password, this.getPrice());
+  if (isPaid) this.setClosed();
+  return isPaid;
+}
+
+AFTER (Strategy pattern for different types of payment):
+public boolean processOrder(PaymentStrategy paymentStrategy) throws IllegalStateException {
+  if (isClosed()) return true;
+  if (paymentStrategy == null || !paymentStrategy.validate()) {
+    throw new IllegalStateException("Payment information is not set or not valid.");
+  }
+  boolean isPaid = paymentStrategy.pay(this.getPrice());
+  if (isPaid) this.setClosed();
+  return isPaid;
+}
+
+(Payment Strategy Interface):
+
+public interface PaymentStrategy {
+    
+    boolean pay(double amount) throws IllegalStateException;
+    
+    boolean validate();
+}
+
 ```
+
+**Why This Is Better:**
+- Eliminates duplicated payment validation/processing logic from `FlightOrder`
+- New payment methods can be added by implementing `PaymentStrategy`
+- `FlightOrder` is now closed for modification but open for extension (OCP)
+- Payment-specific rules are encapsulated in `CreditCard` and `Paypal`
 
 #### Question: Were any metrics negatively impacted?
 
