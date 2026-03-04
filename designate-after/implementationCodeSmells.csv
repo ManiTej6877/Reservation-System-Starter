@@ -5,6 +5,8 @@ main,flight.reservation.flight,Schedule,removeFlight,Long Statement
 main,flight.reservation.flight,ScheduledFlight,ScheduledFlight,Long Parameter List
 main,flight.reservation.flight,ScheduledFlight,ScheduledFlight,Long Parameter List
 main,flight.reservation.payment,CreditCard,CreditCard,Magic Number
+main,flight.reservation.payment,ExternalPaymentAdapter,pay,Magic Number
+main,flight.reservation.payment,ExternalPaymentAdapter,validate,Long Statement
 main,flight.reservation.plane,AircraftFactory,createAircraft,Missing default
 main,flight.reservation.plane,Helicopter,Helicopter,Magic Number
 main,flight.reservation.plane,Helicopter,Helicopter,Magic Number
@@ -19,3 +21,4 @@ main,flight.reservation.plane,PassengerPlane,PassengerPlane,Magic Number
 main,flight.reservation.plane,PassengerPlane,PassengerPlane,Magic Number
 main,flight.reservation.plane,PassengerPlane,PassengerPlane,Magic Number
 main,flight.reservation.plane,PassengerPlane,PassengerPlane,Missing default
+main,flight.reservation.validation,PassengerNoFlyListHandler,validate,Long Statement
